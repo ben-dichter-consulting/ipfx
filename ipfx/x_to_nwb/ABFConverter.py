@@ -652,11 +652,7 @@ class ABFConverter:
                                                       conversion=conversion,
                                                       starting_time=starting_time,
                                                       rate=rate,
-                                                      description=description,
-                                                      bias_current=settings["bias_current"],
-                                                      bridge_balance=settings["bridge_balance"],
-                                                      stimulus_description=stimulus_description,
-                                                      capacitance_compensation=settings["capacitance_compensation"])
+                                                      description=description)
                     else:
                         raise ValueError(f"Unsupported clamp mode {clampMode}.")
 
