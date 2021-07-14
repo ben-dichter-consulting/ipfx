@@ -514,7 +514,7 @@ class ABFConverter:
                     d["whole_cell_capacitance_comp"] = np.nan
                     d["whole_cell_series_resistance_comp"] = np.nan
 
-            elif clampMode in (I_CLAMP_MODE, I0_CLAMP_MODE):
+            elif clampMode == I_CLAMP_MODE:
                 if settings["GetHoldingEnable"]:
                     d["bias_current"] = settings["GetHolding"]
                 else:
@@ -529,10 +529,6 @@ class ABFConverter:
                     d["capacitance_compensation"] = settings["GetNeutralizationCap"]
                 else:
                     d["capacitance_compensation"] = np.nan
-            elif clampMode == I0_CLAMP_MODE:
-                d["bias_current"] = np.nan
-                d["bridge_balance"] = np.nan
-                d["capacitance_compensation"] = np.nan
             else:
                 warnings.warn("Unsupported clamp mode {clampMode}")
         else:
@@ -544,17 +540,12 @@ class ABFConverter:
                 d["resistance_comp_prediction"] = np.nan
                 d["whole_cell_capacitance_comp"] = np.nan
                 d["whole_cell_series_resistance_comp"] = np.nan
-            elif clampMode in (I_CLAMP_MODE, I0_CLAMP_MODE):
-                d["bias_current"] = np.nan
-                d["bridge_balance"] = np.nan
-                d["capacitance_compensation"] = np.nan
-            elif clampMode == I0_CLAMP_MODE:
+            elif clampMode == I_CLAMP_MODE:
                 d["bias_current"] = np.nan
                 d["bridge_balance"] = np.nan
                 d["capacitance_compensation"] = np.nan
             else:
                 warnings.warn("Unsupported clamp mode {clampMode}")
-
         return d
 
     def _createAcquiredSeries(self, electrodes):
@@ -625,7 +616,7 @@ class ABFConverter:
                                                       whole_cell_capacitance_comp=settings["whole_cell_capacitance_comp"],  # noqa: E501
                                                       whole_cell_series_resistance_comp=settings["whole_cell_series_resistance_comp"])  # noqa: E501
 
-                    elif clampMode in (I_CLAMP_MODE, I0_CLAMP_MODE):
+                    elif clampMode == I_CLAMP_MODE:
                         acquistion_data = seriesClass(name=name,
                                                       data=data,
                                                       sweep_number=np.uint64(cycle_id),
